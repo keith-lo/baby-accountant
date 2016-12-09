@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { PageSupercustomersComponent } from './page-supercustomers.component';
+import { CustomerTransactionsComponent } from './customer-transactions.component';
 
-describe('PageSupercustomersComponent', () => {
-  let component: PageSupercustomersComponent;
-  let fixture: ComponentFixture<PageSupercustomersComponent>;
+describe('CustomerTransactionsComponent', () => {
+  let component: CustomerTransactionsComponent;
+  let fixture: ComponentFixture<CustomerTransactionsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageSupercustomersComponent ]
+      declarations: [ CustomerTransactionsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PageSupercustomersComponent);
+    fixture = TestBed.createComponent(CustomerTransactionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

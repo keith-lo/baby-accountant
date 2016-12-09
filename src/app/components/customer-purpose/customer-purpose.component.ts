@@ -17,6 +17,10 @@ interface DeletePurposeForm{
   purpose: CustomerPurposeInfo;
 }
 
+interface CounterInfo{
+  amount: number; paid: number; balance: number;
+}
+
 @Component({
   selector: 'app-customer-purpose',
   templateUrl: './customer-purpose.component.html',
@@ -26,10 +30,11 @@ interface DeletePurposeForm{
 export class CustomerPurposeComponent implements OnInit {
   @Input() public customer: Customer;
 
-  private purposes: PurposeInfo[];
-  private today: Date = new Date();
-  private purposeForm: AddPurposeForm = <AddPurposeForm>{};
-  private deleteForm: DeletePurposeForm = <DeletePurposeForm>{};
+  public purposes: PurposeInfo[];
+  public counter: CounterInfo = <CounterInfo>{'amount':0,'paid':0,'balance':0};
+  public today: Date = new Date();
+  public purposeForm: AddPurposeForm = <AddPurposeForm>{};
+  public deleteForm: DeletePurposeForm = <DeletePurposeForm>{};
 
   constructor(
     private _purposesService: PurposesService,
@@ -48,7 +53,19 @@ export class CustomerPurposeComponent implements OnInit {
     });
 
     if( !this.customer.purposes ){ this.customer.purposes = []; }
-    this._customersService.joinedPurposes(this.customer).subscribe(() => console.log(this.customer));
+    this._customersService.joinedPurposes(this.customer).subscribe(
+      () => {
+
+        this.counter = {'amount': 0, 'paid': 0, 'balance': 0};
+
+        this.customer.purposes.forEach(purpose => {
+          
+          this.counter.amount += purpose.amount;
+          this.counter.paid += purpose.paid;
+          this.counter.balance += purpose.balance;
+        });
+      }
+    );
   }
 
   public onPurposeModalSave(modal: any): void{

@@ -25,6 +25,13 @@ export class AccountReceivalbe extends Transaction{
   }
 }
 
+export interface BankInfo{
+  id: number; name: string;
+}
+export interface PaymentMethodInfo{
+  id: number; name: string;
+}
+
 @Injectable()
 export class TransactionsService {
 

@@ -14,8 +14,10 @@
   </div>
 
   <div class="row" *ngIf="selectedCustomer.id">
-    <app-customer-purpose
-      [customer]="selectedCustomer"
-    ></app-customer-purpose>
+    <app-customer-purpose [customer]="selectedCustomer"></app-customer-purpose>
+  </div>
+
+  <div class="row" *ngIf="selectedCustomer.id">
+    <app-customer-transactions [customer]="selectedCustomer"></app-customer-transactions>
   </div>
 </div>

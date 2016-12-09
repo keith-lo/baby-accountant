@@ -26,6 +26,7 @@ import { CustomerInfoComponent } from './components/customer-info/customer-info.
 import { CustomerPurposeComponent } from './components/customer-purpose/customer-purpose.component';
 import { PageAdminComponent } from './pages/admin/page-admin/page-admin.component';
 import { PageSupercustomersComponent } from './pages/admin/customers/page-supercustomers/page-supercustomers.component';
+import { CustomerTransactionsComponent } from './components/customer-transactions/customer-transactions.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { PageSupercustomersComponent } from './pages/admin/customers/page-superc
     CustomerInfoComponent,
     CustomerPurposeComponent,
     PageAdminComponent,
-    PageSupercustomersComponent
+    PageSupercustomersComponent,
+    CustomerTransactionsComponent
   ],
   imports: [
     BrowserModule,

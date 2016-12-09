@@ -4,6 +4,7 @@ import { HttpService, ServerInfo } from '../http/http.service';
 import { Observable } from 'rxjs/Observable';
 
 import { PurposeInfo } from '../purposes/purposes.service';
+import { BankInfo, PaymentMethodInfo } from '../transactions/transactions.service';
 
 export class Customer{
   public referenceNumber: string;
@@ -15,6 +16,7 @@ export class Customer{
   public remark: string;
 
   public purposes: CustomerPurposeInfo[];
+  public transactions: CustomerTransactionInfo[];
 
   constructor(){}
 
@@ -23,12 +25,25 @@ export class Customer{
   }
 }
 
+export interface CustomerTransactionInfo{
+  bank: BankInfo,
+  type: PaymentMethodInfo;
+  date: Date;
+  remark: string;
+  salesman: string;
+  currency: string;
+  value: number;
+  netAmount: number;
+}
+
 export interface CustomerPurposeInfo{
   id: number;
   purpose: PurposeInfo;
   remark: string;
   date: Date;
   amount: number;
+  paid: number;
+  balance: number;
   isDeleted: boolean;
 }
 
@@ -108,26 +123,44 @@ export class CustomersService {
     );
   }
 
-  public joinedPurposes(customer: Customer): Observable<PurposeInfo[]>{
+  public joinedPurposes(customer: Customer): Observable<CustomerPurposeInfo[]>{
     return this._http.api('customer.listpurposes', {"id": customer.id}).map(
       serverInfo => {
-        let purposes = [];
-
-        serverInfo.data.purposes.map(data => {
-          let purposeInfo = <CustomerPurposeInfo>{
+        let purposes: CustomerPurposeInfo[] = serverInfo.data.purposes.map(
+          data => <CustomerPurposeInfo>{ 
             'id': data.id,
             'purpose': {'id': data.purpose_id, 'name': data.purpose_name},
             'date': new Date(data.remindDate),
-            'amount': data.amount,
+            'amount': isNaN(+data.amount) ? 0 : +data.amount,
+            'paid': isNaN(+data.paid) ? 0 : +data.paid,
+            'balance': isNaN(+data.balance) ? 0 : +data.balance,
             'remark': data.remark
-          };
-
-          purposes.push(purposeInfo);
-        });
-
+          }
+        );
         customer.purposes = purposes;
         
         return purposes;
+      }
+    );
+  }
+
+  public paymentsHistory(customer: Customer): Observable<CustomerTransactionInfo[]>{
+    return this._http.api('customer.paymentshistory', {'id': customer.id}).map(
+      serverInfo => {
+        console.log(serverInfo.data.payments);
+        let transactions: CustomerTransactionInfo[] = serverInfo.data.payments.map(
+          data => <CustomerTransactionInfo>{
+            bank: {'id': data.bank_id, 'name': data.bank_name},
+            type: {'id': data.type_id, 'name': data.type_name},
+            date: new Date(data.paymentDate),
+            salesman: data.salesman, remark: data.remark,
+            currency: data.currency, value: data.value, netAmount: data.netAmount
+          }
+        );
+
+        customer.transactions = transactions;
+
+        return transactions;
       }
     );
   }

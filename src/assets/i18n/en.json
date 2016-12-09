@@ -52,7 +52,13 @@
     "removeTips": "There is no way to recover this action.",
     "amount": "Amount",
     "amount_ph": "1234567.89",
+    "paid": "Paid",
+    "balance": "Balance",
     "remark_ph": "Remark....."
+  },
+  "transactions": {
+    "title": "Transactions",
+    "received": "Total received : "
   },
   "reports":{
     "name": "Reports"

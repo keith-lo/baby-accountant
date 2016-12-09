@@ -4,34 +4,50 @@
     
     <div *ngFor="let cpurpose of customer.purposes; let i = index;">
       <div class="row">
-        <div class="col-lg-10 col-md-10 col-sm-12">
-          <div class="col-lg-2 col-md-4 col-sm-6">{{cpurpose.date|date:'yyyy-MM-dd'}}</div>
-          <div class="col-lg-6 col-md-4 col-sm-6">
+        <div class="col-lg-10 col-md-10 col-xs-12">
+          <div class="col-lg-2 col-md-4 col-xs-6">{{cpurpose.date|date:'yyyy-MM-dd'}}</div>
+          <div class="col-lg-5 col-md-4 col-xs-6">
             <strong>{{cpurpose.purpose.name}}</strong>
           </div>
-          <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="col-lg-5 col-md-4 col-xs-12">
             <span class="text-danger">$ {{cpurpose.amount|number}}</span>
-            <span class="text-default"> / </span>
-            <span class="text-danger">$ {{cpurpose.amount|number}}</span>
+
+            <span class="text-default" *ngIf="cpurpose.paid>0"> / </span>
+            <span class="text-primary" *ngIf="cpurpose.paid>0">$ {{cpurpose.paid|number}}</span>
+
+            <span class="text-warning" *ngIf="cpurpose.paid>0">( $ {{cpurpose.balance|number}} )</span>
           </div>
           <div class="col-lg-12">
             <span class="text-muted" *ngIf="cpurpose.remark">-- {{cpurpose.remark}}</span>
           </div>
         </div>
-        <div class="col-lg-2 col-md-2 col-sm-12 text-right">
+        <div class="col-lg-2 col-md-2 col-xs-12 text-right">
           <button class="btn btn-default" (click)="onEditCustomerPurpose(i, modal)"><i class="fa fa-edit"></i></button>
           <button class="btn btn-default" (click)="onDeleteCustomerPurpose(i, alert)"><i class="fa fa-times"></i></button>
         </div>
       </div>
       <div class="row" *ngIf="customer.purposes.length - 1 > i">
-        <hr class="col-lg-12 col-md-12 col-sm-12">
+        <hr class="col-lg-12 col-md-12 col-xs-12">
       </div>
     </div>
   
   </div>
 
-  <div class="panel-footer text-right">  
-    <button type="button" class="btn btn-success" (click)="onAddCustomerPurpose(modal)">{{'form.button.new'|translate}}</button>
+  <div class="panel-footer">  
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-xs-6">
+        <span class="text-danger">{{'purposes.amount'|translate}}: {{counter.amount|number}}</span>
+      </div>
+      <div class="col-lg-3 col-md-3 col-xs-6">
+        <span class="text-primary">{{'purposes.paid'|translate}}: {{counter.paid|number}}</span>
+      </div>
+      <div class="col-lg-3 col-md-3 col-xs-6">
+        <span class="text-warning">{{'purposes.balance'|translate}}: {{counter.balance|number}}</span>
+      </div>
+      <div class="col-lg-3 col-md-3 col-xs-6 text-right">
+        <button type="button" class="btn btn-success" (click)="onAddCustomerPurpose(modal)">{{'form.button.new'|translate}}</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -42,13 +58,13 @@
   </modal-header>
   <modal-body *ngIf="deleteForm.purpose">
     <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm6">
+      <div class="col-lg-4 col-md-4 col-xs6">
         <strong>{{deleteForm.purpose.date|date:'yyyy-MM-dd'}}</strong>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm6">
+      <div class="col-lg-4 col-md-4 col-xs6">
         <strong>{{deleteForm.purpose.purpose.name}}</strong>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm12">
+      <div class="col-lg-4 col-md-4 col-xs12">
         <strong>${{deleteForm.purpose.amount|number}}</strong>
       </div>
     </div>
