@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <i class="fa fa-bar-chart-o fa-fw"></i> {{'dashboard.incoming'|translate}}
+  </div>
+  <div class="panel-body">
+    <div style="display: block">
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
+</div>

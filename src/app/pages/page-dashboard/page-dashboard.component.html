@@ -1,0 +1,44 @@
+<app-nav></app-nav>
+  
+<!-- /#page-wrapper -->
+<div id="page-wrapper">
+
+  <!-- Page dashboard -->
+  <div class="row">
+      <div class="col-lg-12">
+          <h1 class="page-header">{{'dashboard.name' | translate}}</h1>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+    <form class="form form-inline">
+        <i class="fa fa-calendar"></i>
+        
+        <input type="date" value="{{fromDate | date:'yyyy-MM-dd'}}" class="form-control"
+            #htmlFromDate (input)="onFromDateChanged(htmlFromDate.value, htmlToDate)"
+        >
+        <span> ~ </span>
+        <input type="date" value="{{toDate | date:'yyyy-MM-dd'}}" class="form-control"
+            #htmlToDate (input)="onToDateChanged(htmlToDate.value)"
+        >
+        
+    </form>
+    </div>
+  </div>
+  
+  <hr>
+
+  <div class="row">
+    <div class="col-lg-8">
+        <app-bar-chart></app-bar-chart>
+    </div>
+        
+    <div class="col-lg-4">
+        <app-ar-list [transactions]="arTransactions"></app-ar-list>
+    </div>
+  </div>
+  <!-- Page dashboard -->
+
+</div>
+<!-- /#page-wrapper -->      

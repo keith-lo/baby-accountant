@@ -1,0 +1,62 @@
+<div class="panel panel-default">
+  <div class="panel-heading">{{'customers.personalInformation'|translate}} 
+    <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" *ngIf="isLoading"></span>
+  </div>
+  <div class="panel-body">
+    <form (change)="onFormChanged()">
+        <input type="hidden" name="id" [(ngModel)]="customer.id" />
+
+        <div class="row" *ngIf="errMsg">
+          <div class="form-group col-lg-12">
+            <label class="control-label">{{errMsg}}</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-lg-8">
+            <label for="customers-detail-Name">{{'customerinfo.name'|translate}}</label>
+            <input type="text" class="form-control" placeholder="{{'customerinfo.name_ph'|translate}}"
+              [(ngModel)]="customer.name" id="customers-detail-Name" name="name"
+            >
+          </div>
+          <div class="form-group col-lg-4">
+            <label for="customers-detail-ReferenceNumber">{{'customerinfo.refNo'|translate}} <span class="text-danger">*</span></label>
+            <input type="number" class="form-control" id="customers-detail-ReferenceNumber" name="referenceNumber"
+              placeholder="{{'customerinfo.refNo_ph'|translate}}" [(ngModel)]="customer.referenceNumber" required />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-lg-4">
+            <label for="customers-detail-age">{{'customerinfo.age'|translate}}</label>
+            <input type="text" class="form-control" placeholder="{{'customerinfo.age_ph'|translate}}"
+              [(ngModel)]="customer.age" id="customers-detail-age" name="age"
+            >
+          </div>
+
+          <div class="form-group col-lg-4">
+            <label for="customers-detail-tel">{{'customerinfo.tel'|translate}}</label>
+            <input type="text" class="form-control" placeholder="{{'customerinfo.tel_ph'|translate}}"
+              [(ngModel)]="customer.tel" id="customers-detail-tel" name="tel"
+            >
+          </div>
+
+          <div class="form-group col-lg-4">
+            <label for="customers-detail-program">{{'customerinfo.program'|translate}}</label>
+            <input type="text" class="form-control" placeholder="{{'customerinfo.program_ph'|translate}}"
+              [(ngModel)]="customer.program" id="customers-detail-program" name="program"
+            >
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-lg-12">
+            <label for="customers-detail-remark">{{'customerinfo.remark'|translate}}</label>
+            <input type="text" class="form-control" placeholder="{{'customerinfo.remark_ph'|translate}}"
+              [(ngModel)]="customer.remark" id="customers-detail-remark" name="remark"
+            >
+          </div>
+        </div>
+    </form>
+  </div>
+</div>

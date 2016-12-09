@@ -1,0 +1,65 @@
+{
+  "form":{
+    "label": {
+      "date": "Date"
+    },
+    "button":{
+      "save": "Save",
+      "new": "+ New",
+      "cancel": "Cancel"
+    }
+  },
+  "login": {
+    "button": "Login",
+    "title": "Please Sign In",
+    "email": "E-mail",
+    "password": "Password"
+  },
+  "menu": {
+    "profile": "Profile",
+    "logout": "Log Out"
+  },
+  "dashboard": {
+    "name": "Dashboard",
+    "incoming": "Accounts receivable"
+  },
+  "customers": {
+    "name": "Customers",
+    "newCustomer": "New Customer",
+    "selectCustomer": "Select Customer",
+
+    "personalInformation": "Personal information"
+  },
+  "customerinfo": {
+    "name": "Name",
+    "name_ph": "Name...",
+    "refNo": "Reference Number",
+    "refNo_ph": "#1234567",
+    "age": "Age",
+    "age_ph": "Optional",
+    "tel": "Tel",
+    "tel_ph": "Optional",
+    "program": "Program",
+    "program_ph": "Optional",
+    "remark": "Remark",
+    "remark_ph": "Remark....."
+  },
+  "purposes": {
+    "title": "Services",
+    "removeAlert": "Warning! Are you sure to remove the folllowing service(s)?",
+    "removeTips": "There is no way to recover this action.",
+    "amount": "Amount",
+    "amount_ph": "1234567.89",
+    "remark_ph": "Remark....."
+  },
+  "reports":{
+    "name": "Reports"
+  },
+  "t": {
+    "refNo": "#",
+    "date": "Date",
+    "balance": "Balance"
+  }
+
+
+}
