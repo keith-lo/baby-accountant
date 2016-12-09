@@ -19,8 +19,6 @@ export class NavComponent implements OnInit {
 
 
   logout(): void{
-
-    console.log("Logout clicked");
     this._usersService.logout();
     this._router.navigate(['/login']);
   }

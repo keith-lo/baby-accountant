@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Search Result
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive table-bordered">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>{{'customerinfo.refNo_sh'|translate}}</th>
+                        <th>{{'customerinfo.name'|translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let customer of customers" (click)="onCustomerClicked(customer)">
+                        <td>#{{customer.referenceNumber}}</td>
+                        <td>
+                            {{customer.name}}
+                            <span class="pull-right"><i class="fa fa-chevron-right"></i></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- /.panel-body -->
+</div>
+<!-- /.panel -->

@@ -6,7 +6,8 @@
     "button":{
       "save": "Save",
       "new": "+ New",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "view": "View"
     }
   },
   "login": {
@@ -35,6 +36,7 @@
     "name_ph": "Name...",
     "refNo": "Reference Number",
     "refNo_ph": "#1234567",
+    "refNo_sh": "#",
     "age": "Age",
     "age_ph": "Optional",
     "tel": "Tel",

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TransactionsService, AccountReceivalbe } from '../../services/transactions/transactions.service';
-import { HttpService } from '../../services/http/http.service';
+import { TransactionsService, AccountReceivalbe } from '../../../services/transactions/transactions.service';
+import { HttpService } from '../../../services/http/http.service';
 
 @Component({
   selector: 'app-page-dashboard',

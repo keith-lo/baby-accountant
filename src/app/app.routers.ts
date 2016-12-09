@@ -1,14 +1,28 @@
-import { PageDashboardComponent } from './pages/page-dashboard/page-dashboard.component';
+import { PageAdminComponent } from './pages/admin/page-admin/page-admin.component';
 import { PageLoginComponent } from './pages/page-login/page-login.component';
-import { PageSearchcustomersComponent } from './pages/page-searchcustomers/page-searchcustomers.component';
-import { PageNewcustomerComponent } from './pages/page-newcustomer/page-newcustomer.component';
+
+import { PageDashboardComponent } from './pages/admin/page-dashboard/page-dashboard.component';
+
+//Customers
+import { PageSearchcustomersComponent } from './pages/admin/customers/page-searchcustomers/page-searchcustomers.component';
+import { PageNewcustomerComponent } from './pages/admin/customers/page-newcustomer/page-newcustomer.component';
+import { PageSupercustomersComponent } from './pages/admin/customers/page-supercustomers/page-supercustomers.component';
+
 
 //Route map
 export const RouterMap = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
-  { path: 'dashboard', component: PageDashboardComponent },
-  { path: 'customers', component: PageSearchcustomersComponent },
-  { path: 'customers/new', component: PageNewcustomerComponent },
-  { path: 'customers/:id', component: PageNewcustomerComponent },
-  { path: 'login', component: PageLoginComponent }
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: PageLoginComponent },
+  { 
+    path: 'admin', component: PageAdminComponent,
+    children: [
+      { path: '', component: PageDashboardComponent },
+      { path: 'dashboard', component: PageDashboardComponent },
+
+      { path: 'customer-new', component: PageNewcustomerComponent },
+      { path: 'customer-search/:by', component: PageSearchcustomersComponent },
+      { path: 'customer/:id', component: PageNewcustomerComponent }
+      
+    ] //End of admin children 
+  }
 ];

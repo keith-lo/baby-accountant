@@ -24,7 +24,7 @@ export class PageLoginComponent implements OnInit {
   public login(): void{
     this._usersService.login(this.user.email, this.user.password)
     .subscribe(isSuccess => {
-      if( isSuccess ){ this._router.navigate(['/dashboard']); }
+      if( isSuccess ){ this._router.navigate(['/admin']); }
     });
   }
 

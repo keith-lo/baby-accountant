@@ -18,12 +18,14 @@ import { BarChartComponent } from './components/charts/bar-chart/bar-chart.compo
 import { ArListComponent } from './components/data-table/ar-list/ar-list.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
-import { PageDashboardComponent } from './pages/page-dashboard/page-dashboard.component';
+import { PageDashboardComponent } from './pages/admin/page-dashboard/page-dashboard.component';
 import { PageLoginComponent } from './pages/page-login/page-login.component';
-import { PageSearchcustomersComponent } from './pages/page-searchcustomers/page-searchcustomers.component';
-import { PageNewcustomerComponent } from './pages/page-newcustomer/page-newcustomer.component';
+import { PageSearchcustomersComponent } from './pages/admin/customers/page-searchcustomers/page-searchcustomers.component';
+import { PageNewcustomerComponent } from './pages/admin/customers/page-newcustomer/page-newcustomer.component';
 import { CustomerInfoComponent } from './components/customer-info/customer-info.component';
 import { CustomerPurposeComponent } from './components/customer-purpose/customer-purpose.component';
+import { PageAdminComponent } from './pages/admin/page-admin/page-admin.component';
+import { PageSupercustomersComponent } from './pages/admin/customers/page-supercustomers/page-supercustomers.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { CustomerPurposeComponent } from './components/customer-purpose/customer
     PageSearchcustomersComponent,
     PageNewcustomerComponent,
     CustomerInfoComponent,
-    CustomerPurposeComponent
+    CustomerPurposeComponent,
+    PageAdminComponent,
+    PageSupercustomersComponent
   ],
   imports: [
     BrowserModule,

@@ -142,7 +142,20 @@ export class CustomersService {
    * @return Observable<ServerInfo>
    */
   public save(customer: Customer): Observable<ServerInfo>{
-    var data = JSON.parse(JSON.stringify(customer));
+    let data = JSON.parse(JSON.stringify(customer));
     return this._http.api('customer.save', data);
+  }
+
+  /**
+   * Search customers
+   */
+  public search(search: string, limit: number, offset: number): Observable<Customer[]>{
+    if( !limit ){ limit = 25; }
+    if( !offset ){ offset = 0; }
+
+    let data = { search: search, limit: limit, offset: offset }; 
+    return this._http.api('customer.search', data).map(
+      serverInfo => <Customer[]> serverInfo.data.customers
+    );
   }
 }

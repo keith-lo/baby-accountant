@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { TranslateService } from 'ng2-translate';
 
-import { Customer, CustomersService } from '../../services/customers/customers.service';
-import { HttpService } from '../../services/http/http.service';
+import { Customer, CustomersService } from '../../../../services/customers/customers.service';
+import { HttpService } from '../../../../services/http/http.service';
 
 @Component({
   selector: 'app-page-newcustomer',
@@ -14,6 +14,7 @@ import { HttpService } from '../../services/http/http.service';
   providers: [CustomersService, HttpService]
 })
 export class PageNewcustomerComponent implements OnInit {
+  @Input() id: number;
   
   public selectedCustomer: Customer;
   public title: string;
@@ -32,10 +33,10 @@ export class PageNewcustomerComponent implements OnInit {
     this._translate.get('customers.newCustomer').subscribe(
       data => this.title = data
     );
+    
     this._params = this._activatedRoute.params.subscribe(params => {
       let id: number = parseInt(params['id']);
 
-      id = 10;
       if( id ){ this._getCustomerInfo(id); }
     });
   }
