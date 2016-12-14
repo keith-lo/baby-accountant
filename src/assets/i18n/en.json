@@ -58,7 +58,11 @@
   },
   "transactions": {
     "title": "Transactions",
-    "received": "Total received : "
+    "received": "Total received : ",
+    "amount": "Amount",
+    "confirmAs": "Confirm As: ",
+    "salesman": "Salesman",
+    "salesman_ph": "e.g.: Peter, Susan.."
   },
   "reports":{
     "name": "Reports"

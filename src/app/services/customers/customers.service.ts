@@ -25,6 +25,17 @@ export class Customer{
   }
 }
 
+
+export interface AddTransactionInfo{
+  currency: string;
+  bankId: number;
+  methodId: number;
+  value: number;
+  netAmount: number;
+  date: Date;
+  customerPurposeId: number;
+}
+
 export interface CustomerTransactionInfo{
   bank: BankInfo,
   type: PaymentMethodInfo;
@@ -123,6 +134,45 @@ export class CustomersService {
     );
   }
 
+  public addTransaction(customer: Customer): Observable<ServerInfo>{
+
+    /*
+    let data = {
+      'customer_id': customer.id, 'customerpurpose_id': form.customerPurposeId,
+      'bank_id': form.bankId, 'type_id': form.methodId,
+      'value': form.value, 'netAmount': form.netAmount,
+      'date': form.date.toJSON()
+    };
+    */
+let data = {};
+    console.log('Data ');
+    console.log(data);
+return null;
+/*
+    return this._http.api('customer.addpayment', data).map(
+      serverInfo => {
+        console.log('Add payment response', serverInfo);
+        return serverInfo;
+      }
+    );
+*/
+
+
+    /*
+    date:2016-12-17T13:07:08.473Z
+netAmount:9000
+value:8000
+salesman:Peter
+remark:abcd1234
+bank_id:1
+type_id:2
+customer_id:1
+customerpurpose_id:1
+currency:HKD
+cmd:customer.addpayment
+    */
+  }
+
   public joinedPurposes(customer: Customer): Observable<CustomerPurposeInfo[]>{
     return this._http.api('customer.listpurposes', {"id": customer.id}).map(
       serverInfo => {
@@ -147,7 +197,6 @@ export class CustomersService {
   public paymentsHistory(customer: Customer): Observable<CustomerTransactionInfo[]>{
     return this._http.api('customer.paymentshistory', {'id': customer.id}).map(
       serverInfo => {
-        console.log(serverInfo.data.payments);
         let transactions: CustomerTransactionInfo[] = serverInfo.data.payments.map(
           data => <CustomerTransactionInfo>{
             bank: {'id': data.bank_id, 'name': data.bank_name},

@@ -26,6 +26,9 @@ export class AccountReceivalbe extends Transaction{
 }
 
 export interface BankInfo{
+  id: number; name: string, methods: PaymentMethodInfo[];
+}
+export interface CurrencyInfo{
   id: number; name: string;
 }
 export interface PaymentMethodInfo{
@@ -44,5 +47,35 @@ export class TransactionsService {
               payment => new AccountReceivalbe(payment)
             );
           });
+  }
+
+  public getBankList(): Observable<{banks: BankInfo[], currencies: CurrencyInfo[]}>{
+    return this._http.api('bank.list', {}).map(
+      serverInfo => {
+        console.log(serverInfo.data);
+        let _banks:BankInfo[] = [];
+        let _currencies = <CurrencyInfo[]> serverInfo.data.currencies;
+
+        serverInfo.data.bankTypes.forEach(obj => {
+          let _method: PaymentMethodInfo = <PaymentMethodInfo>{
+            id: obj.type_id, name: obj.type_name
+          };
+
+          let _isFound: boolean = false;
+          _banks.map(a => {
+            if( a.id == obj.id ){
+              _isFound = true;
+              a.methods.push(_method);
+            }
+          });
+
+          if( !_isFound ){
+            _banks.push({id: obj.id, name: obj.name, methods: [_method]});
+          }
+        });
+
+        return {banks:_banks, currencies:_currencies};
+      }
+    );
   }
 }
