@@ -37,8 +37,10 @@ export interface AddTransactionInfo{
 }
 
 export interface CustomerTransactionInfo{
+  id: number,
+  customerPurposeId: number,
   bank: BankInfo,
-  type: PaymentMethodInfo;
+  method: PaymentMethodInfo;
   date: Date;
   remark: string;
   salesman: string;
@@ -120,7 +122,7 @@ export class CustomersService {
     );
   }
 
-  public deletePurpose(customer: Customer, purposeId: number): Observable<ServerInfo>{
+  public deletePurpose(customer: Customer, purposeId: number): Observable<Customer>{
     return this._http.api('customer.removepurpose', {'id': purposeId}).map(
       serverInfo => {
         customer.purposes.forEach((purpose: CustomerPurposeInfo, index: number) => {
@@ -129,48 +131,41 @@ export class CustomersService {
           }
         });
         
+        console.log('deletePurpose', customer);
+        return customer;
+    });
+  }
+
+  public addTransaction(customer: Customer, info: CustomerTransactionInfo): Observable<ServerInfo>{
+    let data = {
+      'customer_id': customer.id, 'customerpurpose_id': info.customerPurposeId,
+      'bank_id': info.bank.id, 'type_id': info.method.id,
+      'value': info.value, 'netAmount': info.netAmount,
+      'date': info.date.toJSON(), 'remark': info.remark,
+      'salesman': info.salesman
+    };
+
+    return this._http.api('customer.addpayment', data).map(
+      serverInfo => {
+        info.id = serverInfo.data.id;
+        customer.transactions.push(info);
         return serverInfo;
       }
     );
   }
 
-  public addTransaction(customer: Customer): Observable<ServerInfo>{
-
-    /*
-    let data = {
-      'customer_id': customer.id, 'customerpurpose_id': form.customerPurposeId,
-      'bank_id': form.bankId, 'type_id': form.methodId,
-      'value': form.value, 'netAmount': form.netAmount,
-      'date': form.date.toJSON()
-    };
-    */
-let data = {};
-    console.log('Data ');
-    console.log(data);
-return null;
-/*
-    return this._http.api('customer.addpayment', data).map(
+  public deleteTransaction(customer: Customer, transactionId: number): Observable<Customer>{
+    return this._http.api('customer.removepayment', {'id': transactionId}).map(
       serverInfo => {
-        console.log('Add payment response', serverInfo);
-        return serverInfo;
+        customer.transactions.forEach((transaction: CustomerTransactionInfo, index: number) => {
+          if( transaction.id == transactionId ){
+            customer.transactions.slice(index, 1);
+          }
+        });
+
+        return customer;
       }
     );
-*/
-
-
-    /*
-    date:2016-12-17T13:07:08.473Z
-netAmount:9000
-value:8000
-salesman:Peter
-remark:abcd1234
-bank_id:1
-type_id:2
-customer_id:1
-customerpurpose_id:1
-currency:HKD
-cmd:customer.addpayment
-    */
   }
 
   public joinedPurposes(customer: Customer): Observable<CustomerPurposeInfo[]>{
@@ -197,10 +192,12 @@ cmd:customer.addpayment
   public paymentsHistory(customer: Customer): Observable<CustomerTransactionInfo[]>{
     return this._http.api('customer.paymentshistory', {'id': customer.id}).map(
       serverInfo => {
+        console.log('Payments...', serverInfo.data.payments);
         let transactions: CustomerTransactionInfo[] = serverInfo.data.payments.map(
           data => <CustomerTransactionInfo>{
+            id: data.id, customerPurposeId: data.customerpurpose_id,
             bank: {'id': data.bank_id, 'name': data.bank_name},
-            type: {'id': data.type_id, 'name': data.type_name},
+            method: {'id': data.type_id, 'name': data.type_name},
             date: new Date(data.paymentDate),
             salesman: data.salesman, remark: data.remark,
             currency: data.currency, value: data.value, netAmount: data.netAmount

@@ -54,20 +54,10 @@ export class CustomerPurposeComponent implements OnInit {
 
     if( !this.customer.purposes ){ this.customer.purposes = []; }
     this._customersService.joinedPurposes(this.customer).subscribe(
-      () => {
-
-        this.counter = {'amount': 0, 'paid': 0, 'balance': 0};
-
-        this.customer.purposes.forEach(purpose => {
-          
-          this.counter.amount += purpose.amount;
-          this.counter.paid += purpose.paid;
-          this.counter.balance += purpose.balance;
-        });
-      }
+      () => this._calCounter()
     );
   }
-
+  
   public onPurposeModalSave(modal: any): void{
     let action: string = this.purposeForm._action;
 
@@ -114,7 +104,11 @@ export class CustomerPurposeComponent implements OnInit {
   }
   public onConfirmedDelete(modal: any){
     this._customersService.deletePurpose(this.customer, this.deleteForm.purpose.id).subscribe(
-      () => modal.close()
+      (customer: Customer) => {
+        this.customer = customer;
+        this._calCounter();
+        modal.close();
+      }
     );
   }
 
@@ -131,8 +125,10 @@ export class CustomerPurposeComponent implements OnInit {
     };
 
     this._customersService.addPurpose(this.customer, customerPurpose).subscribe(
-      () => modal.close()
-    );
+      () => {
+        this._calCounter();
+        modal.close();
+    });
   }
 
   private _editCustomerPurpose(selectedPurpose: PurposeInfo, modal: any): void{
@@ -145,8 +141,21 @@ export class CustomerPurposeComponent implements OnInit {
     };
 
     this._customersService.editPurpose(this.customer, customerPurpose).subscribe(
-      () => modal.close()
-    );
+      () => {
+        this._calCounter();
+        modal.close()
+    });
+  }
+
+  private _calCounter(): void{
+    this.counter = {'amount': 0, 'paid': 0, 'balance': 0};
+
+    this.customer.purposes.forEach(purpose => {
+      
+      this.counter.amount += +purpose.amount;
+      this.counter.paid += +purpose.paid;
+      this.counter.balance += +purpose.balance;
+    });
   }
 
 }

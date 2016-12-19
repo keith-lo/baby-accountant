@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Customer, CustomersService, CustomerPurposeInfo, AddTransactionInfo } from '../../services/customers/customers.service';
+import { Customer, CustomersService, CustomerPurposeInfo, CustomerTransactionInfo } from '../../services/customers/customers.service';
 import { TransactionsService, BankInfo, CurrencyInfo, PaymentMethodInfo } from '../../services/transactions/transactions.service';
 import { HttpService } from '../../services/http/http.service';
 
@@ -17,7 +17,8 @@ export class CustomerTransactionsComponent implements OnInit {
 
   public banks: BankInfo[] = [];
   public currencies: CurrencyInfo[] = [];
-  public addTransactionForm: AddTransactionInfo = <AddTransactionInfo>{};
+  public addTransactionForm: CustomerTransactionInfo;
+  public delTransactionForm: CustomerTransactionInfo;
   public today: Date = new Date();
 
   public customerPurposeBalance: number;
@@ -34,33 +35,48 @@ export class CustomerTransactionsComponent implements OnInit {
     if( !this.customer.purposes ){ this.customer.purposes = []; }
 
     this._customersService.paymentsHistory(this.customer).subscribe(
-      () => {
-        this.customer.transactions.forEach(transaction => {
-          this.totalReceived += +transaction.netAmount;
-        });
-      }
+      () => this._calTotalReceived()
     );
 
     this._getBankInfo();
 
-    this.addTransactionForm = <AddTransactionInfo>{
-      currency: '', date: new Date(), value:null, netAmount: null,
-      bankId:null, methodId:null, customerPurposeId: null
+    this.addTransactionForm = <CustomerTransactionInfo>{
+      id: null, currency: '', date: new Date(), value:null, netAmount: null,
+      bank: <BankInfo> {id:null,name:null}, method: <PaymentMethodInfo> {id:null,name:null},
+      remark: null, salesman: null
+    };
+    this.delTransactionForm = <CustomerTransactionInfo>{
+      id: null, currency: '', date: new Date(), value:null, netAmount: null,
+      bank: <BankInfo> {id:null,name:null}, method: <PaymentMethodInfo> {id:null,name:null},
+      remark: null, salesman: null
     };
   }
 
-  public onAddTransaction(model: any): void{
+  public openCreateDialog(model: any): void{
     model.open();
   }
 
-  public onAddTransactionInfoSubmitted(model): void{
-    console.log("Add form object");
-    console.log(this.addTransactionForm);
-
-    this._customersService.addTransaction(this.customer,this.addTransactionForm).subscribe(
-      () => model.close() 
-    );
+  public openDeleteDialog(i: number, model: any): void{
+    this.delTransactionForm = this.customer.transactions[i];
     
+    model.open();
+  }
+
+  public onAddTransactionInfoSubmitted(model: any): void{
+    this._customersService.addTransaction(this.customer, this.addTransactionForm)
+    .subscribe(() => {
+      this._calTotalReceived();
+      model.close();
+    });
+  }
+
+  public onConfirmedDeleteTransaction(model: any): void{
+    this._customersService.deleteTransaction(this.customer, this.delTransactionForm.id)
+    .subscribe((customer: Customer) => {
+      this.customer = customer;
+      this._calTotalReceived();
+      model.close();
+    });
   }
 
   public onSelectedPurpose(): void{
@@ -77,11 +93,18 @@ export class CustomerTransactionsComponent implements OnInit {
 
   public onSelectedBank(value: string): void{
     let arr = value.split(':');
-    let bankIndex = arr[0]; let methodIndex = arr[1];
+    let bankIndex: number = +arr[0]; let methodIndex: number = +arr[1];
     let bankInfo: BankInfo = this.banks[bankIndex];
 
-    this.addTransactionForm.bankId = bankInfo.id;
-    this.addTransactionForm.methodId = bankInfo.methods[methodIndex].id;
+    this.addTransactionForm.bank = bankInfo;
+    this.addTransactionForm.method = bankInfo.methods[methodIndex];
+  }
+
+  private _calTotalReceived(): void{
+    this.totalReceived = 0;
+    this.customer.transactions.forEach(transaction => {
+      this.totalReceived += +transaction.netAmount;
+    });
   }
 
   private _getBankInfo(): void{

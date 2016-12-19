@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AccountReceivalbe } from '../../../services/transactions/transactions.service';
 
@@ -10,14 +11,16 @@ import { AccountReceivalbe } from '../../../services/transactions/transactions.s
 export class ArListComponent implements OnInit {
   @Input()
   public transactions: AccountReceivalbe[] = [];
-  constructor() { }
+  
+  constructor(
+    private _router: Router,
+  ) { }
 
   ngOnInit() {
   }
 
   public onTransactionClicked(transaction: AccountReceivalbe){
-    let refNo: string = transaction.referenceNumber;
-    console.log("Go to customer : "+refNo);
+    this._router.navigate([`/admin/customer/${transaction.customerId}`]);
   }
 
 }

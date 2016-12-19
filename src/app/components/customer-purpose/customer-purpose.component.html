@@ -58,13 +58,13 @@
   </modal-header>
   <modal-body *ngIf="deleteForm.purpose">
     <div class="row">
-      <div class="col-lg-4 col-md-4 col-xs6">
+      <div class="col-lg-4 col-md-4 col-xs-6">
         <strong>{{deleteForm.purpose.date|date:'yyyy-MM-dd'}}</strong>
       </div>
-      <div class="col-lg-4 col-md-4 col-xs6">
+      <div class="col-lg-4 col-md-4 col-xs-6">
         <strong>{{deleteForm.purpose.purpose.name}}</strong>
       </div>
-      <div class="col-lg-4 col-md-4 col-xs12">
+      <div class="col-lg-4 col-md-4 col-xs-12">
         <strong>${{deleteForm.purpose.amount|number}}</strong>
       </div>
     </div>
@@ -73,8 +73,8 @@
     <div class="text-right">{{'purposes.removeTips'|translate}}</div>
   </modal-body>
   <modal-footer>
-    <button class="btn btn-default" data-dismiss="alert" type="button">{{'form.button.cancel'|translate}}</button>
-    <button class="btn btn-danger" (click)="onConfirmedDelete(alert)">{{'form.button.save'|translate}}</button>
+    <button class="btn btn-default" (click)="alert.close()" type="button">{{'form.button.cancel'|translate}}</button>
+    <button class="btn btn-danger" (click)="onConfirmedDelete(alert)">{{'form.button.delete'|translate}}</button>
   </modal-footer>
 </modal>
 

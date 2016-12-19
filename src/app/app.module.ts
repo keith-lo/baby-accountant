@@ -27,6 +27,7 @@ import { CustomerPurposeComponent } from './components/customer-purpose/customer
 import { PageAdminComponent } from './pages/admin/page-admin/page-admin.component';
 import { PageSupercustomersComponent } from './pages/admin/customers/page-supercustomers/page-supercustomers.component';
 import { CustomerTransactionsComponent } from './components/customer-transactions/customer-transactions.component';
+import { CtListComponent } from './components/data-table/ct-list/ct-list.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { CustomerTransactionsComponent } from './components/customer-transaction
     CustomerPurposeComponent,
     PageAdminComponent,
     PageSupercustomersComponent,
-    CustomerTransactionsComponent
+    CustomerTransactionsComponent,
+    CtListComponent
   ],
   imports: [
     BrowserModule,

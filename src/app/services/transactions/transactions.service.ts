@@ -5,10 +5,14 @@ import { Observable } from 'rxjs/Observable';
 
 import { PurposeInfo } from '../purposes/purposes.service';
 
+import { CustomerTransactionInfo } from '../customers/customers.service';
+
 class Transaction{
   public referenceNumber: string;
+  public customerId: number;
   constructor(data: any){
     this.referenceNumber = data.referenceNumber;
+    this.customerId = data.customerId;
   }
 }
 
@@ -16,12 +20,35 @@ export class AccountReceivalbe extends Transaction{
   public balance: number;
   public purpose: PurposeInfo;
   public remindDate: Date;
+  
 
   constructor(data: any){ 
-    super({referenceNumber: data.referenceNumber});
+    super({referenceNumber: data.referenceNumber, customerId: data.customer_id});
     this.balance = data.balance;
     this.purpose = <PurposeInfo>{id: data.purpose_id, name: data.purpose_name}
     this.remindDate = new Date(data.remindDate);
+  }
+}
+
+export class PaymentTransaction extends Transaction{
+  public value: number;
+  public netAmount: number;
+  public currency: string;
+  public customerId: number;
+  public date: Date;
+  public salesman: string;
+  public bank: BankInfo;
+  public paymentMethod: PaymentMethodInfo;
+
+  constructor(data: any){
+    super({referenceNumber: data.referenceNumber, customerId: data.customer_id});
+    this.netAmount = data.netAmount;
+    this.value = data.value;
+    this.date = new Date(data.date);
+    this.salesman = data.salesman;
+    this.currency = data.currency;
+    this.bank = {id: data.bank_id, name: data.bank_name, methods: []};
+    this.paymentMethod = {id: data.type_id, name: data.type_name};
   }
 }
 
@@ -40,6 +67,15 @@ export class TransactionsService {
 
   constructor(private _http: HttpService) { }
 
+  public listReceivedPayments(fromDate: Date, toDate: Date){
+    return this._http.api('customer.listpayments', {from: fromDate.toJSON(), to: toDate.toJSON()})
+          .map(serverInfo => {
+            return serverInfo.data.payments.map(
+              data => new PaymentTransaction(data)
+            )
+          });
+  }
+
   public listAccountsReceivable(fromDate: Date, toDate: Date): Observable<AccountReceivalbe[]>{
     return this._http.api('customer.listbalance', {from: fromDate.toJSON(), to: toDate.toJSON()})
           .map(serverInfo => {
@@ -52,7 +88,6 @@ export class TransactionsService {
   public getBankList(): Observable<{banks: BankInfo[], currencies: CurrencyInfo[]}>{
     return this._http.api('bank.list', {}).map(
       serverInfo => {
-        console.log(serverInfo.data);
         let _banks:BankInfo[] = [];
         let _currencies = <CurrencyInfo[]> serverInfo.data.currencies;
 
