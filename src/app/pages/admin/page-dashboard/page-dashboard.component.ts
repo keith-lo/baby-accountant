@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TransactionsService, AccountReceivalbe, PaymentTransaction } from '../../../services/transactions/transactions.service';
-import { BarChartData } from '../../../components/charts/bar-chart/bar-chart.component';
+
 import { HttpService } from '../../../services/http/http.service';
 import { Observable } from 'rxjs/Rx';
 
@@ -20,6 +20,11 @@ export class PageDashboardComponent implements OnInit {
 
   public arTransactions: AccountReceivalbe[] = [];
   public customerTransactions: PaymentTransaction[] = [];
+
+
+  public barChart = {
+    labels: [], data: []
+  };
 
   constructor(private _transactions: TransactionsService) { }
 
@@ -52,19 +57,33 @@ export class PageDashboardComponent implements OnInit {
     //Stop to redraw the report if date format is incorrect.
     if( this.fromDate > this.toDate ){ return; }
 
-    Observable.forkJoin([this._getAccountsReceivable(), this._getPaymentTransactions()])
-      .subscribe(() => {
-        this.customerTransactions.forEach(transaction => {
-          //<BarChartData>{ label: 'xxxx', data: }
-        });
-      });
+    this._getPaymentTransactions();
+    this._getAccountsReceivable();
+    //this._getRevenueReport();
 
   }
+/*
+  private _getRevenueReport(){
+    this._transactions.getReportTList(this.fromDate, this.toDate).subscribe(
+      serverInfo => {
+        console.log(serverInfo.data);
+        let reportData = serverInfo.data.report;
+        
+        this.barChart.labels = reportData.label;
+        this.barChart.data = [
+        {data: [65, 59, 80, 81, 56, 55], label: 'Data A'},
+        {data: [28, 48, 40, 19, 86, 27], label: 'Dta B'}
+      ];
+      }
+    );
+  }
+*/  
 
   private _getPaymentTransactions(): Promise<boolean>{
     return new Promise((resolve, reject) => {
       this._transactions.listReceivedPayments(this.fromDate, this.toDate).subscribe(
         transactions => {
+          console.log(transactions);
           this.customerTransactions = transactions;
           resolve(true);
         }

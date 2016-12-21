@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-      <i class="fa fa-th-list fa-fw"></i> {{'dashboard.incoming'|translate}}
+      <i class="fa fa-th-list fa-fw"></i> {{'dashboard.transactions'|translate}}
   </div>
   <div class="panel-body">
       <div class="table-responsive">
@@ -14,10 +14,10 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr *ngFor="let transaction of transactions" (click)="onTransactionClicked(transaction)">>
+                  <tr *ngFor="let transaction of transactions" (click)="onTransactionClicked(transaction)">
                       <td>{{transaction.referenceNumber}}</td>
                       <td>{{transaction.date | date:'yyyy-MM-dd'}}</td>
-                      <td>{{transaction.bank.name}} ({{transaction.type.name}})</td>
+                      <td>{{transaction.bank.name}}-{{transaction.paymentMethod.name}}</td>
                       <td>{{transaction.currency}}
                         {{transaction.value | number}} ({{transaction.netAmount | number}})</td>
                   </tr>

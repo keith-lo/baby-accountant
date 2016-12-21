@@ -23,7 +23,8 @@
   },
   "dashboard": {
     "name": "Dashboard",
-    "incoming": "Accounts receivable"
+    "incoming": "Accounts receivable",
+    "transactions": "Received payments"
   },
   "customers": {
     "name": "Customers",

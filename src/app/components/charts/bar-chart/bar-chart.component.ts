@@ -1,22 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-
-export class BarChartData{
-  data: number[];
-  label: string;
-}
-
-export class BarChartInfo{
-  showLegend: boolean = true;
-  label: string[];
-  data: BarChartData[];
-}
-
-export class BarChartOptions{
-  scaleShowVerticalLines?: boolean; 
-  responsive?: boolean
-}
-
 @Component({
   selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',
@@ -28,11 +11,11 @@ export class BarChartComponent implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true
   }
-  public barChartLabels:string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType:string = 'bar';
-  public barChartLegend:boolean = false;
+  @Input('label') public barChartLabels:string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  @Input() public barChartType:string = 'bar';
+  @Input() public barChartLegend:boolean = false;
 
-  public barChartData:any[] = [
+  @Input('data') public barChartData:any[] = [
     {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
     {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
   ];

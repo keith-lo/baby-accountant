@@ -85,6 +85,21 @@ export class TransactionsService {
           });
   }
 
+  public getReportRevenue(fromDate: Date, toDate: Date){
+    return this._http.api('report.revenue', {from: fromDate.toJSON(), to: toDate.toJSON()})
+          .map(serverInfo => {
+            console.log(serverInfo);
+          });
+  }
+
+  public getReportTList(fromDate: Date, toDate: Date): Observable<ServerInfo>{
+    console.log('get report tlist');
+    return this._http.api('report.tlist', {from: fromDate.toJSON(), to: toDate.toJSON()})
+          .map(serverInfo => {
+            return serverInfo;
+          });
+  }
+
   public getBankList(): Observable<{banks: BankInfo[], currencies: CurrencyInfo[]}>{
     return this._http.api('bank.list', {}).map(
       serverInfo => {

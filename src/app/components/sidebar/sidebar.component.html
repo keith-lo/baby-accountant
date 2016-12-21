@@ -23,9 +23,29 @@
           </li>
           <li>
               <a href="#"><i class="fa fa-signal fa-fw"></i> {{'reports.name'|translate}}</a>
-              
+          </li>
+
+          <li class="sidebar-search">
+              <div class="input-group custom-search-form">
+                <label for="sidebar-calendar">{{'customerinfo.name'|translate}}</label>
+                <input id="sidebar-calendar" type="date" name="date" value="{{today | date:'yyyy-MM-dd'}}" class="form-control"
+                #countDate (change)="onChangeCountDate(countDate.value)" />
+              </div>
+              <!-- /input-group -->
+              <div class="input-group custom-search-form">
+                <label for="sidebar-days">+ Days</label>       
+                <input id="sidebar-days" type="number" name="days" [(ngModel)]="defaultSteps" class="form-control" 
+                (change)="calTargetDate()" />
+              </div>
+
+              <hr>
+              <!-- /input-group -->
+              <div class="text-right">
+                  {{targetDate | date:'yyyy-MM-dd'}}
+              </div>
           </li>
       </ul>
+
   </div>
   <!-- /.sidebar-collapse -->
 </div>
