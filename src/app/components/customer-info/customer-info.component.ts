@@ -12,8 +12,8 @@ import { HttpService } from '../../services/http/http.service';
 export class CustomerInfoComponent implements OnInit {
   @Input() public customer: Customer;
 
-  @Output() public customerSaved: EventEmitter<{customer: Customer}> = new EventEmitter();
-  @Output() public customerCreated: EventEmitter<{customer: Customer}> = new EventEmitter();
+  @Output() public customerSaved: EventEmitter<any> = new EventEmitter();
+  @Output() public customerCreated: EventEmitter<any> = new EventEmitter();
 
   private isLoading: boolean = false;
   public errMsg: string;

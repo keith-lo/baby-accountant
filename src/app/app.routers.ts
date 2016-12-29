@@ -6,7 +6,6 @@ import { PageDashboardComponent } from './pages/admin/page-dashboard/page-dashbo
 //Customers
 import { PageSearchcustomersComponent } from './pages/admin/customers/page-searchcustomers/page-searchcustomers.component';
 import { PageNewcustomerComponent } from './pages/admin/customers/page-newcustomer/page-newcustomer.component';
-import { PageSupercustomersComponent } from './pages/admin/customers/page-supercustomers/page-supercustomers.component';
 
 
 //Route map

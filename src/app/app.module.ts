@@ -25,7 +25,6 @@ import { PageNewcustomerComponent } from './pages/admin/customers/page-newcustom
 import { CustomerInfoComponent } from './components/customer-info/customer-info.component';
 import { CustomerPurposeComponent } from './components/customer-purpose/customer-purpose.component';
 import { PageAdminComponent } from './pages/admin/page-admin/page-admin.component';
-import { PageSupercustomersComponent } from './pages/admin/customers/page-supercustomers/page-supercustomers.component';
 import { CustomerTransactionsComponent } from './components/customer-transactions/customer-transactions.component';
 import { CtListComponent } from './components/data-table/ct-list/ct-list.component';
 
@@ -44,7 +43,6 @@ import { CtListComponent } from './components/data-table/ct-list/ct-list.compone
     CustomerInfoComponent,
     CustomerPurposeComponent,
     PageAdminComponent,
-    PageSupercustomersComponent,
     CustomerTransactionsComponent,
     CtListComponent
   ],
