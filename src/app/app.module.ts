@@ -9,6 +9,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RouterMap } from './app.routers';
 
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
+import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
 
@@ -27,6 +28,7 @@ import { CustomerPurposeComponent } from './components/customer-purpose/customer
 import { PageAdminComponent } from './pages/admin/page-admin/page-admin.component';
 import { CustomerTransactionsComponent } from './components/customer-transactions/customer-transactions.component';
 import { CtListComponent } from './components/data-table/ct-list/ct-list.component';
+import { PageReportComponent } from './pages/admin/page-report/page-report.component';
 
 
 @NgModule({
@@ -44,7 +46,8 @@ import { CtListComponent } from './components/data-table/ct-list/ct-list.compone
     CustomerPurposeComponent,
     PageAdminComponent,
     CustomerTransactionsComponent,
-    CtListComponent
+    CtListComponent,
+    PageReportComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ import { CtListComponent } from './components/data-table/ct-list/ct-list.compone
     FormsModule,
     HttpModule,
     Ng2Bs3ModalModule,
+    NKDatetimeModule,
     RouterModule.forRoot(RouterMap),
     TranslateModule.forRoot({
         provide: TranslateLoader,

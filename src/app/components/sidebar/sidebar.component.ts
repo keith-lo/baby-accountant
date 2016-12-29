@@ -10,6 +10,10 @@ export class SidebarComponent implements OnInit {
 
   private search: string;
   public today: Date;
+  public datetimeOpt = {
+    autoclose: true,
+    icon: 'fa fa-calendar'
+  };
   public defaultSteps: number;
   public targetDate: Date;
 
@@ -29,18 +33,10 @@ export class SidebarComponent implements OnInit {
       this._router.navigate([`/admin/customer-search/${this.search}`]);
     }
   }
-  public onChangeCountDate(date:string): void{
-    this.today = new Date(date);
-    this.calTargetDate();
-  }
 
   public calTargetDate(): void{
-    console.log('cal days');
     this.targetDate = new Date(this.today.getTime());
-    console.log('today is ', this.today);
-
     this.targetDate.setDate(this.targetDate.getDate() + this.defaultSteps);
-    console.log('target to ', this.targetDate);
   }
 
 }

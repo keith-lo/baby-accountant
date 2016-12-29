@@ -18,6 +18,11 @@ export class PageDashboardComponent implements OnInit {
   //The ending date of dashboard reports
   public toDate: Date = new Date();
 
+  public datetimeOpt = {
+    autoclose: true,
+    icon: 'fa fa-calendar'
+  };
+
   public arTransactions: AccountReceivalbe[] = [];
   public customerTransactions: PaymentTransaction[] = [];
 
@@ -48,8 +53,8 @@ export class PageDashboardComponent implements OnInit {
     this._redrawReport();
   }
 
-  public onToDateChanged(value: string){
-    this.toDate = new Date(value);
+  public onToDateChanged(){
+    console.log('on to date');
     this._redrawReport();
   }
 

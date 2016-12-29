@@ -22,14 +22,14 @@
               <a href="/admin/customer-new" [routerLink]="['/admin/customer-new']"><i class="fa fa-group fa-fw"></i> {{'customers.name'|translate}}</a>
           </li>
           <li>
-              <a href="#"><i class="fa fa-signal fa-fw"></i> {{'reports.name'|translate}}</a>
+              <a href="/admin/report" [routerLink]="['/admin/report']"><i class="fa fa-signal fa-fw"></i> {{'reports.name'|translate}}</a>
           </li>
 
           <li class="sidebar-search">
               <div class="input-group custom-search-form">
-                <label for="sidebar-calendar">{{'customerinfo.name'|translate}}</label>
-                <input id="sidebar-calendar" type="date" name="date" value="{{today | date:'yyyy-MM-dd'}}" class="form-control"
-                #countDate (change)="onChangeCountDate(countDate.value)" />
+                <datetime [timepicker]="false" [datepicker]="datetimeOpt" [(ngModel)]="today"
+                    (ngModelChange)="calTargetDate()"
+                ></datetime>
               </div>
               <!-- /input-group -->
               <div class="input-group custom-search-form">

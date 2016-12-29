@@ -7,6 +7,7 @@ import { PageDashboardComponent } from './pages/admin/page-dashboard/page-dashbo
 import { PageSearchcustomersComponent } from './pages/admin/customers/page-searchcustomers/page-searchcustomers.component';
 import { PageNewcustomerComponent } from './pages/admin/customers/page-newcustomer/page-newcustomer.component';
 
+import { PageReportComponent } from './pages/admin/page-report/page-report.component';
 
 //Route map
 export const RouterMap = [
@@ -20,7 +21,9 @@ export const RouterMap = [
 
       { path: 'customer-new', component: PageNewcustomerComponent },
       { path: 'customer-search/:by', component: PageSearchcustomersComponent },
-      { path: 'customer/:id', component: PageNewcustomerComponent }
+      { path: 'customer/:id', component: PageNewcustomerComponent },
+
+      { path: 'report', component: PageReportComponent }
       
     ] //End of admin children 
   }
