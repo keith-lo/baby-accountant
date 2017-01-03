@@ -85,11 +85,9 @@ export class TransactionsService {
           });
   }
 
-  public getReportRevenue(fromDate: Date, toDate: Date){
+  public getReportRevenue(fromDate: Date, toDate: Date): Observable<ServerInfo>{
     return this._http.api('report.revenue', {from: fromDate.toJSON(), to: toDate.toJSON()})
-          .map(serverInfo => {
-            console.log(serverInfo);
-          });
+          .map(serverInfo => serverInfo);
   }
 
   public getReportTList(fromDate: Date, toDate: Date): Observable<ServerInfo>{

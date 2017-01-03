@@ -22,10 +22,14 @@ export class HttpService {
 
   constructor(private _http: Http) { 
     this._accessToken = localStorage.getItem(StorageKey.authToken);
+    if( this._accessToken ){
+      this._headers.set('Authorization', `Bearer ${this._accessToken}`);
+    }
   }
 
   public setAccessToken(token: string){ 
     this._accessToken = token;
+    this._headers.set('Authorization', `Bearer ${this._accessToken}`);
     localStorage.setItem(StorageKey.authToken, token);
   }
   public getAccessToken(): string{ return this._accessToken; }
@@ -38,12 +42,7 @@ export class HttpService {
     params = ( params ) ? params : {};
     params.cmd = cmd;
 
-    let headers: Headers = this._headers;
-    if( this._accessToken ){
-      headers.append('Authorization', `Bearer ${this._accessToken}`);
-    }
-
-    return this._http.post(AppConfig.api, params, {headers: headers}).map(response => <ServerInfo>response.json());            
+    return this._http.post(AppConfig.api, params, {headers: this._headers}).map(response => <ServerInfo>response.json());            
   }
 
   private _httpException(error: any): Promise<any>{
