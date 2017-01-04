@@ -30,6 +30,7 @@ import { CustomerTransactionsComponent } from './components/customer-transaction
 import { CtListComponent } from './components/data-table/ct-list/ct-list.component';
 import { PageReportComponent } from './pages/admin/page-report/page-report.component';
 import { PageReportReceivedComponent } from './pages/admin/page-report-received/page-report-received.component';
+import { PageInvoiceComponent } from './pages/page-invoice/page-invoice.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { PageReportReceivedComponent } from './pages/admin/page-report-received/
     CustomerTransactionsComponent,
     CtListComponent,
     PageReportComponent,
-    PageReportReceivedComponent
+    PageReportReceivedComponent,
+    PageInvoiceComponent
   ],
   imports: [
     BrowserModule,

@@ -10,10 +10,14 @@ import { PageNewcustomerComponent } from './pages/admin/customers/page-newcustom
 import { PageReportComponent } from './pages/admin/page-report/page-report.component';
 import { PageReportReceivedComponent } from './pages/admin/page-report-received/page-report-received.component';
 
+import { PageInvoiceComponent } from './pages/page-invoice/page-invoice.component';
+
+
 //Route map
 export const RouterMap = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: PageLoginComponent },
+  { path: 'invoice/:id', component: PageInvoiceComponent },
   { 
     path: 'admin', component: PageAdminComponent,
     children: [
