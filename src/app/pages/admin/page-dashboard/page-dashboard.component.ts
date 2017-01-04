@@ -47,14 +47,7 @@ export class PageDashboardComponent implements OnInit {
     this._redrawReport();
   }
 
-  public onFromDateChanged(value: string, nextElement: HTMLElement){
-    this.fromDate = new Date(value);
-    nextElement.focus();  //Focus to #toDate
-    this._redrawReport();
-  }
-
-  public onToDateChanged(){
-    console.log('on to date');
+  public onDateChanged(){
     this._redrawReport();
   }
 
@@ -64,31 +57,12 @@ export class PageDashboardComponent implements OnInit {
 
     this._getPaymentTransactions();
     this._getAccountsReceivable();
-    //this._getRevenueReport();
-
   }
-/*
-  private _getRevenueReport(){
-    this._transactions.getReportTList(this.fromDate, this.toDate).subscribe(
-      serverInfo => {
-        console.log(serverInfo.data);
-        let reportData = serverInfo.data.report;
-        
-        this.barChart.labels = reportData.label;
-        this.barChart.data = [
-        {data: [65, 59, 80, 81, 56, 55], label: 'Data A'},
-        {data: [28, 48, 40, 19, 86, 27], label: 'Dta B'}
-      ];
-      }
-    );
-  }
-*/  
 
   private _getPaymentTransactions(): Promise<boolean>{
     return new Promise((resolve, reject) => {
       this._transactions.listReceivedPayments(this.fromDate, this.toDate).subscribe(
         transactions => {
-          console.log(transactions);
           this.customerTransactions = transactions;
           resolve(true);
         }

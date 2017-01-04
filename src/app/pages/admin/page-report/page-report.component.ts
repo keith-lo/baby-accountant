@@ -17,6 +17,11 @@ export class PageReportComponent implements OnInit {
   //The ending date of dashboard reports
   public toDate: Date = new Date();
 
+  public datetimeOpt = {
+    autoclose: true,
+    icon: 'fa fa-calendar'
+  };
+
   public reportData: any = [];
 
   constructor(private _transactions: TransactionsService) { }
@@ -33,6 +38,10 @@ export class PageReportComponent implements OnInit {
     this.toDate.setMonth(this.toDate.getMonth()+5);
 
     this._redrawReport();    
+  }
+
+  public onDateChanged(){
+    this._redrawReport();
   }
 
   private _redrawReport(): void{

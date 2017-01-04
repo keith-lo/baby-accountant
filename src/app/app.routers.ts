@@ -8,6 +8,7 @@ import { PageSearchcustomersComponent } from './pages/admin/customers/page-searc
 import { PageNewcustomerComponent } from './pages/admin/customers/page-newcustomer/page-newcustomer.component';
 
 import { PageReportComponent } from './pages/admin/page-report/page-report.component';
+import { PageReportReceivedComponent } from './pages/admin/page-report-received/page-report-received.component';
 
 //Route map
 export const RouterMap = [
@@ -23,7 +24,8 @@ export const RouterMap = [
       { path: 'customer-search/:by', component: PageSearchcustomersComponent },
       { path: 'customer/:id', component: PageNewcustomerComponent },
 
-      { path: 'report', component: PageReportComponent }
+      { path: 'report', component: PageReportComponent },
+      { path: 'report/:month', component: PageReportReceivedComponent }
       
     ] //End of admin children 
   }

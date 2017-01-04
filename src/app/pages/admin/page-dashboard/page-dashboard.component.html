@@ -7,19 +7,17 @@
   </div>
 
   <div class="row">
-      
-  </div>
-
-  <div class="row">
     <div class="pull-left">
         From:
-        <datetime [timepicker]="false" [datepicker]="datetimeOpt" [(ngModel)]="fromDate"></datetime>
+        <datetime [timepicker]="false" [datepicker]="datetimeOpt" [(ngModel)]="fromDate"
+            (ngModelChange)="onDateChanged()"
+        ></datetime>
     </div>
 
     <div class="pull-left">
         To:
         <datetime [timepicker]="false" [datepicker]="datetimeOpt" [(ngModel)]="toDate"
-            (ngModelChange)="onToDateChanged()"
+            (ngModelChange)="onDateChanged()"
         ></datetime>
     </div>
   </div>
