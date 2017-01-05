@@ -20,6 +20,20 @@
             (ngModelChange)="onDateChanged()"
         ></datetime>
     </div>
+
+    <div class="pull-right">
+        
+        
+        
+        <form ngNoForm action="{{excelFormData.url}}" method="post">
+            <input type="hidden" name="access_token" value="{{excelFormData.accessToken}}">
+            <input type="hidden" name="fromDate" value="{{excelFormData.fromDate | date:'yyyy-MM-dd'}}">
+            <input type="hidden" name="toDate" value="{{excelFormData.toDate | date:'yyyy-MM-dd'}}">
+            <input type="hidden" name="cmd" value="export.transactions">
+
+            <button class="btn btn-success" type="submit">Excel</button>
+        </form>
+    </div>
   </div>
   
   <hr>

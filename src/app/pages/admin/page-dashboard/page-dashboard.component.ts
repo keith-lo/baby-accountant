@@ -23,6 +23,13 @@ export class PageDashboardComponent implements OnInit {
     icon: 'fa fa-calendar'
   };
 
+  public excelFormData = {
+    fromDate: new Date(),
+    toDate: new Date(),
+    accessToken: null,
+    url: null
+  }
+
   public arTransactions: AccountReceivalbe[] = [];
   public customerTransactions: PaymentTransaction[] = [];
 
@@ -31,7 +38,7 @@ export class PageDashboardComponent implements OnInit {
     labels: [], data: []
   };
 
-  constructor(private _transactions: TransactionsService) { }
+  constructor(private _transactions: TransactionsService, private _http: HttpService) { }
 
   ngOnInit() {
     //To the first day of this month
@@ -45,9 +52,19 @@ export class PageDashboardComponent implements OnInit {
     this.toDate.setMonth(this.toDate.getMonth()+6);
 
     this._redrawReport();
+
+    this.excelFormData = {
+      fromDate: this.fromDate,
+      toDate: this.toDate,
+      accessToken: this._http.getAccessToken(),
+      url: this._http.getApiUrl()
+    }
   }
 
   public onDateChanged(){
+    this.excelFormData.fromDate = this.fromDate;
+    this.excelFormData.toDate = this.toDate;
+
     this._redrawReport();
   }
 

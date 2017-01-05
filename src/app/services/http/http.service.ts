@@ -45,6 +45,8 @@ export class HttpService {
     return this._http.post(AppConfig.api, params, {headers: this._headers}).map(response => <ServerInfo>response.json());            
   }
 
+  public getApiUrl(): string{ return AppConfig.api; }
+
   private _httpException(error: any): Promise<any>{
     console.error("Connection error.", error);
     return Promise.reject(error.message || error);
