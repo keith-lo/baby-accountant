@@ -1,0 +1,53 @@
+<div class="navbar-default sidebar" role="navigation">
+  <div class="sidebar-nav navbar-collapse">
+      <ul class="nav" id="side-menu">
+          <li class="sidebar-search">
+              <form (submit)="onSearchSubmitted()" method="GET" action="/admin/customer-search">
+              <div class="input-group custom-search-form">
+                  
+                  <input type="text" class="form-control" [(ngModel)]="search" name="by" placeholder="Search...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+              </div>
+              </form>
+              <!-- /input-group -->
+          </li>
+          <li>
+              <a href="/admin" [routerLink]="['/admin/dashboard']"><i class="fa fa-dashboard fa-fw"></i> {{'dashboard.name'|translate}}</a>
+          </li>
+          <li>
+              <a href="/admin/customer-new" [routerLink]="['/admin/customer-new']"><i class="fa fa-group fa-fw"></i> {{'customers.name'|translate}}</a>
+          </li>
+          <li>
+              <a href="/admin/report" [routerLink]="['/admin/report']"><i class="fa fa-signal fa-fw"></i> {{'reports.name'|translate}}</a>
+          </li>
+
+          <li class="sidebar-search">
+              <div class="input-group custom-search-form">
+                  <datetime [timepicker]="false" [datepicker]="datetimeOpt" [(ngModel)]="today"
+                    (ngModelChange)="calTargetDate()"
+                  ></datetime>
+
+              </div>
+              <!-- /input-group -->
+              <div class="input-group custom-search-form">
+                <label for="sidebar-days">+ Days</label>       
+                <input id="sidebar-days" type="number" name="days" [(ngModel)]="defaultSteps" class="form-control" 
+                (change)="calTargetDate()" />
+              </div>
+
+              <hr>
+              <!-- /input-group -->
+              <div class="text-right">
+                  {{targetDate | date:'yyyy-MM-dd'}}
+              </div>
+          </li>
+      </ul>
+
+  </div>
+  <!-- /.sidebar-collapse -->
+</div>
+<!-- /.navbar-static-side -->

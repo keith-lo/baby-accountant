@@ -1,0 +1,54 @@
+<div>
+  <div class="row">
+    <div class="pull-left">
+        From:
+        <datetime [timepicker]="false" [datepicker]="datetimeOpt" [(ngModel)]="fromDate"
+          (ngModelChange)="onDateChanged()"
+        ></datetime>
+    </div>
+
+    <div class="pull-left">
+        To:
+        <datetime [timepicker]="false" [datepicker]="datetimeOpt" [(ngModel)]="toDate"
+            (ngModelChange)="onDateChanged()"
+        ></datetime>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-4" *ngFor="let report of reportData">
+        <h3>{{report.name}}</h3>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="col-md-6">Sales</th>
+                <th class="col-md-3 text-danger">Received</th>
+                <th class="col-md-3 text-primary">Coming</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let purpose of report.purposes">
+                <td>{{purpose.name}}</td>
+                <td class="text-center">
+                  <a class="text-danger" href="/admin/report/{{report.name}}"
+                    [routerLink]="['/admin/report', report.name]"
+                  >
+                    {{purpose.received | number}}
+                  </a>
+                </td>
+                <td class="text-center">
+                  <a class="text-primary" href="/admin/report/{{report.name}}"
+                    [routerLink]="['/admin/report', report.name]">
+                    {{purpose.balance | number}}
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+
+  </div>
+</div>

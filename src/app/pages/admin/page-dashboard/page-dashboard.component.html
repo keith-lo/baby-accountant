@@ -1,0 +1,64 @@
+ <div>
+  <!-- Page dashboard -->
+  <div class="row">
+      <div class="col-lg-12">
+          <h1 class="page-header">{{'dashboard.name' | translate}}</h1>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="pull-right">
+        <form ngNoForm action="{{excelFormData.url}}" method="post">
+            <input type="hidden" name="access_token" value="{{excelFormData.accessToken}}">
+            <input type="hidden" name="fromDate" value="{{excelFormData.fromDate | date:'yyyy-MM-dd'}}">
+            <input type="hidden" name="toDate" value="{{excelFormData.toDate | date:'yyyy-MM-dd'}}">
+            <input type="hidden" name="cmd" value="export.customer_payments">
+
+            <button class="btn btn-success" type="submit">Customers Report</button>
+        </form>
+    </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+<hr>
+  <div class="row">
+    <div class="pull-left">
+        From:
+        <datetime [timepicker]="false" [datepicker]="datetimeOpt" [(ngModel)]="fromDate"
+            (ngModelChange)="onDateChanged()"
+        ></datetime>
+    </div>
+
+    <div class="pull-left">
+        To:
+        <datetime [timepicker]="false" [datepicker]="datetimeOpt" [(ngModel)]="toDate"
+            (ngModelChange)="onDateChanged()"
+        ></datetime>
+    </div>
+
+    <div class="pull-right">
+        <form ngNoForm action="{{excelFormData.url}}" method="post">
+            <input type="hidden" name="access_token" value="{{excelFormData.accessToken}}">
+            <input type="hidden" name="fromDate" value="{{excelFormData.fromDate | date:'yyyy-MM-dd'}}">
+            <input type="hidden" name="toDate" value="{{excelFormData.toDate | date:'yyyy-MM-dd'}}">
+            <input type="hidden" name="cmd" value="export.transactions">
+
+            <button class="btn btn-success" type="submit">Transactions Excel</button>
+        </form>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-lg-8">
+        <app-ct-list [transactions]="customerTransactions"></app-ct-list>
+    </div>
+
+    <div class="col-lg-4">
+        <app-ar-list [transactions]="arTransactions"></app-ar-list>
+    </div>
+  </div>
+  <!-- Page dashboard -->
+</div>

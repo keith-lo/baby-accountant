@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <i class="fa fa-th-list fa-fw"></i> {{'dashboard.transactions'|translate}}
+  </div>
+  <div class="panel-body">
+      <div class="table-responsive">
+          <table class="table table-hover table-striped">
+              <thead>
+                  <tr>
+                      <th>{{'t.refNo'|translate}}</th>
+                      <th>{{'t.date'|translate}}</th>
+                      <th>{{'t.bank'|translate}}</th>
+                      <th>{{'t.balance'|translate}}</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let transaction of transactions" (click)="onTransactionClicked(transaction)">
+                      <td>{{transaction.referenceNumber}}</td>
+                      <td>{{transaction.date | date:'yyyy-MM-dd'}}</td>
+                      <td>{{transaction.bank.name}}-{{transaction.paymentMethod.name}}</td>
+                      <td>{{transaction.currency}}
+                        {{transaction.value | number}} ({{transaction.netAmount | number}})</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>

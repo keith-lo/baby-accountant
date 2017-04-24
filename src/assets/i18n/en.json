@@ -1,0 +1,87 @@
+{
+  "form":{
+    "label": {
+      "date": "Date"
+    },
+    "button":{
+      "save": "Save",
+      "new": "+ New",
+      "cancel": "Cancel",
+      "view": "View",
+      "delete": "Delete"
+    }
+  },
+  "login": {
+    "button": "Login",
+    "title": "Please Sign In",
+    "email": "E-mail",
+    "password": "Password"
+  },
+  "menu": {
+    "profile": "Profile",
+    "logout": "Log Out"
+  },
+  "dashboard": {
+    "name": "Dashboard",
+    "incoming": "Accounts receivable",
+    "transactions": "Received payments"
+  },
+  "customers": {
+    "name": "Customers",
+    "newCustomer": "New Customer",
+    "selectCustomer": "Select Customer",
+
+    "personalInformation": "Personal information"
+  },
+  "customerinfo": {
+    "name": "Name",
+    "name_ph": "Name...",
+    "refNo": "Reference Number",
+    "refNo_ph": "#1234567",
+    "refNo_sh": "#",
+    "age": "Age",
+    "age_ph": "Optional",
+    "tel": "Tel",
+    "tel_ph": "Optional",
+    "program": "Program",
+    "program_ph": "Optional",
+    "remark": "Remark",
+    "remark_ph": "Remark....."
+  },
+  "purposes": {
+    "title": "Services",
+    "removeAlert": "Warning! Are you sure to remove the folllowing service(s)?",
+    "removeTips": "There is no way to recover this action.",
+    "amount": "Amount",
+    "amount_ph": "1234567.89",
+    "paid": "Paid",
+    "balance": "Balance",
+    "remark_ph": "Remark....."
+  },
+  "transactions": {
+    "title": "Transactions",
+    "removeAlert": "Warning! Are you sure to remove the folllowing transaction?",
+    "removeTips": "There is no way to recover this action.",
+    "newTransaction": "New Transaction",
+    "received": "Total received : ",
+    "amount": "Amount",
+    "balance": "Balance",
+    "confirmAs": "Confirm As: ",
+    "salesman": "Salesman",
+    "salesman_ph": "e.g.: Peter, Susan..",
+    "remark": "Remark",
+    "remark_ph": "Remark....."
+  },
+  "reports":{
+    "name": "Reports"
+  },
+  "t": {
+    "refNo": "#",
+    "date": "Date",
+    "balance": "Balance",
+    "currency": "Currency",
+    "bank": "Bank"
+  }
+
+
+}
